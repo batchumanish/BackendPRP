@@ -25,16 +25,16 @@ async def get_data():
         data = json.load(file)
     return data
 
-@app.post("/data")
-async def add_data(new_data: dict):
-    current_data = read_data() #gets the data in json
-    current_data.update(new_data)# adds or update the json
-    write_data(current_data)
-    return {"message": "Data added successfully"}
+# @app.post("/data")
+# async def add_data(new_data: dict):
+#     current_data = read_data() #gets the data in json
+#     current_data.update(new_data)# adds or update the json
+#     write_data(current_data)
+#     return {"message": "Data added successfully"}
 
 
-@app.post("/add_value")
-async def add_value(new_value: str):
+# @app.post("/add_value")
+# async def add_value(new_value: str):
     # Read the JSON file
     with open(file_path, "r") as file:
         data = json.load(file)
@@ -53,7 +53,7 @@ with open(file_path, "r") as file:
     restaurants_data = json.load(file)["restaurants"]
     
 @app.get("/search")
-def search_dish(dish: str = Query(..., title="Dish Name")):
+def search_dish(dish: str = Query(default='', title="Dish Name")):
 
     restaurants_with_dish = []
     for restaurant in restaurants_data:
@@ -63,9 +63,15 @@ def search_dish(dish: str = Query(..., title="Dish Name")):
                 break
     return {"restaurants": restaurants_with_dish}    
 
-# write an api which takes restaurant name as input an displays all the dishes in the restaurant
+# write an api which takes restaurant name as input and displays all the dishes in the restaurant
 @app.get("/get_menu")
 def search_dish(restaurant_name:str):
-    return {"restaurant name": restaurant_name}    
+      for restaurant in restaurants_data:
+           if restaurant["name"].lower() == restaurant_name.lower():
+                return restaurant["menu"]
+      return ""   
+          
+    
+
     
     

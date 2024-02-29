@@ -7,10 +7,10 @@
       "timings": "7AM-10PM",
       "menu": [
         {
-          "idli": { "price": "Rs.30", "rating": 4.3 },
-          "dosa": { "price": "Rs.50", "rating": 4.3 },
-          "pongal": { "price": "Rs.70", "rating": 4.5 }
-        }
+          "idli": { "price": "Rs.30", "rating": 4.3 }
+        },
+        { "dosa": { "price": "Rs.50", "rating": 4.3 } },
+        { "pongal": { "price": "Rs.70", "rating": 4.5 } }
       ]
     },
     {
@@ -20,10 +20,10 @@
       "timings": "7AM-10PM",
       "menu": [
         {
-          "idli": { "price": "Rs.20", "rating": 4.3 },
-          "dosa": { "price": "Rs.30", "rating": 4.3 },
-          "pongal": { "price": "Rs.50", "rating": 4.5 }
-        }
+          "idli": { "price": "Rs.20", "rating": 4.3 }
+        },
+        { "dosa": { "price": "Rs.30", "rating": 4.3 } },
+        { "pongal": { "price": "Rs.50", "rating": 4.5 } }
       ]
     },
     {
@@ -33,15 +33,15 @@
       "timings": "24Hrs",
       "menu": [
         {
-          "pizza": { "price": "Rs.200", "rating": 4.3 },
-          "shezwan pizza": { "price": "Rs.300", "rating": 3.9 },
-          "garlic bread": { "price": "Rs.150", "rating": 4.4 }
-        }
+          "pizza": { "price": "Rs.200", "rating": 4.3 }
+        },
+        { "shezwan pizza": { "price": "Rs.300", "rating": 3.9 } },
+        { "garlic bread": { "price": "Rs.150", "rating": 4.4 } }
       ]
     }
   ],
   "users": [
-    { "username": "Manish", "password": "password" },
-    { "username": "Batchu", "password": "password" }
+    { "username": "Manish", "password": "password", "orders": [] },
+    { "username": "Batchu", "password": "password", "orders": [] }
   ]
 }

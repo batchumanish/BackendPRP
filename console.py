@@ -28,7 +28,16 @@ def login(username:str,password:str):
     for element in enumerate(users):
         if element[1]["username"] == username and element[1]["password"]==password:
             return True
-    return False    
+    return False   
+
+def get_menu(restuarant_name:str):
+    response = requests.get(f'http://127.0.0.1:8000/get_menu?restaurant_name={restuarant_name}')  
+    
+    if response.status_code == 200:
+        return response.json()  
+    else:
+        print("Failed to fetch data")
+        return None  
 
 def main():
     global first_time_login
@@ -40,16 +49,30 @@ def main():
     
     if(login(str(username),str(password))):
         print("Successfully logged in ")
-        dish_or_restaurant = input('Search for restuarants or dishes\n') 
+        print(f"Welcome {username}!")
+        while True:
+                dish_or_restaurant = input('Search for restuarants or dishes\n') 
+                if dish_or_restaurant.strip():  # Check if input is not empty after stripping whitespace
+                    break
+                else:
+                    print("Search can't be empty, Please try again.")
+                    
         available_restaurants=search( dish_or_restaurant);
+        
         print("Available restaurants: " )
         for index, element in enumerate(available_restaurants['restaurants']):
-            print(f"{index+1}: {element}")
+            print(f"{index+1}: {element}")           
         hotel_or_dish_option = input('Select from above restaurants\n')  
         if(int(hotel_or_dish_option) >= len(available_restaurants['restaurants'])+1):
             print("Invalid option,Please try again")  
         else:
-            print("Nice")   
+            restaurant_menu=get_menu(available_restaurants['restaurants'][int(hotel_or_dish_option)-1])
+            print("Menu:")
+            for  index,element in enumerate(restaurant_menu):
+                print(f"{index+1}: {next(iter(element))} Price:{element[next(iter(element))]['price']}  Rating:{element[next(iter(element))]['rating']}/5 ") 
+            print("Type the option number with comma and hit enter to add to the menu");    
+                
+            
     else:
         print("Invalid credentials,please try again")
         first_time_login="False"
