@@ -53,11 +53,15 @@ def main():
         while True:
                 dish_or_restaurant = input('Search for restuarants or dishes\n') 
                 if dish_or_restaurant.strip():  # Check if input is not empty after stripping whitespace
-                    break
+                    available_restaurants=search( dish_or_restaurant)
+                    if(len(available_restaurants['restaurants'])!=0):
+                        break
+                    else:
+                        print("Item/Restaurant not available.Please try for some other item/restaurant")
                 else:
                     print("Search can't be empty, Please try again.")
                     
-        available_restaurants=search( dish_or_restaurant);
+        # available_restaurants=search( dish_or_restaurant);
         
         print("Available restaurants: " )
         for index, element in enumerate(available_restaurants['restaurants']):
