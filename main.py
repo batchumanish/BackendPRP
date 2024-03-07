@@ -50,7 +50,7 @@ async def get_data():
 
 class Order(BaseModel):
     restaurant_id:int
-    menu_items: List[str] = []
+    menu_items: List[int] = []
 
  
 
@@ -83,7 +83,17 @@ def search_dish(restaurant_name:str):
 
 @app.post("/order")
 async def read_items(order:Order):
-    return {"menu_items": menu_items}
+    current_data = read_data() #gets the data in json
+    for user in current_data["users"]:
+        if user["uid"] == order.restaurant_id:
+             user["orders"].append(order.menu_items)
+    write_data(current_data)         
+    return {"order":order}
+
+
+    
+     
+     
 
          
           
