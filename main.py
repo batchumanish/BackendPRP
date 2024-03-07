@@ -1,4 +1,4 @@
-from fastapi import FastAPI,HTTPException,Query
+from fastapi import FastAPI,HTTPException,Query,Body
 from pydantic import BaseModel
 import json
 import requests
@@ -70,6 +70,13 @@ def search_dish(restaurant_name:str):
            if restaurant["name"].lower() == restaurant_name.lower():
                 return restaurant["menu"]
       return ""   
+  
+
+@app.post("/order/")
+async def read_items(menu_items: List[str] = Body(...)):
+    return {"menu_items": menu_items}
+
+         
           
     
 

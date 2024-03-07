@@ -57,7 +57,7 @@ def main():
                     if(len(available_restaurants['restaurants'])!=0):
                         break
                     else:
-                        print("Item/Restaurant not available.Please try for some other item/restaurant")
+                        print("Item/Restaurant not available.")
                 else:
                     print("Search can't be empty, Please try again.")
                     
