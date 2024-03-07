@@ -48,9 +48,18 @@ async def get_data():
     
     return {"message": "Value added successfully"}
 
+class Order(BaseModel):
+    restaurant_id:int
+    menu_items: List[str] = []
+
+ 
 
 with open(file_path, "r") as file:
     restaurants_data = json.load(file)["restaurants"]
+    
+# @app.post("/gg")
+# async def create_item(item: Item) -> Item:
+#     return item       
     
 @app.get("/search")
 def search_dish(dish: str = Query(default='', title="Dish Name")):
@@ -58,7 +67,7 @@ def search_dish(dish: str = Query(default='', title="Dish Name")):
     restaurants_with_dish = []
     for restaurant in restaurants_data:
         for menu in restaurant["menu"]:
-            if dish.lower() in menu:
+            if dish.lower() in menu["name"]:
                 restaurants_with_dish.append(restaurant["name"])
                 break
     return {"restaurants": restaurants_with_dish}    
@@ -72,8 +81,8 @@ def search_dish(restaurant_name:str):
       return ""   
   
 
-@app.post("/order/")
-async def read_items(menu_items: List[str] = Body(...)):
+@app.post("/order")
+async def read_items(order:Order):
     return {"menu_items": menu_items}
 
          

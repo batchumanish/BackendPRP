@@ -71,9 +71,9 @@ def main():
             print("Invalid option,Please try again")  
         else:
             restaurant_menu=get_menu(available_restaurants['restaurants'][int(hotel_or_dish_option)-1])
-            print("Menu:")
             for  index,element in enumerate(restaurant_menu):
-                print(f"{index+1}: {next(iter(element))} Price:{element[next(iter(element))]['price']}  Rating:{element[next(iter(element))]['rating']}/5 ") 
+                # print(f"{index+1}: {element["name"]} Price:{element["price"]}  Rating:{element['rating']}/5 ") 
+                print(index+1,element["name"],"Price:",element["price"],"Rating:",element["rating"],"/5")
             print("Type the option number with comma and hit enter to add to the menu");    
                 
             
