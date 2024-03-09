@@ -3,6 +3,7 @@ from pydantic import BaseModel
 import json
 import requests
 from typing import List, Optional
+from datetime import datetime,date
 
 app=FastAPI()
 
@@ -51,6 +52,7 @@ async def get_data():
 class Order(BaseModel):
     restaurant_id:int
     menu_items: List[int] = []
+    order_date:str=str(datetime.now())#how to get the date at the time of execution?
 
  
 
@@ -73,7 +75,7 @@ def search_dish(dish: str = Query(default='', title="Dish Name")):
     return {"restaurants": restaurants_with_dish}    
 
 # write an api which takes restaurant name as input and displays all the dishes in the restaurant
-@app.get("/get_menu")
+@app.get("/get_menu") 
 def search_dish(restaurant_name:str):
       for restaurant in restaurants_data:
            if restaurant["name"].lower() == restaurant_name.lower():
@@ -86,7 +88,7 @@ async def read_items(order:Order):
     current_data = read_data() #gets the data in json
     for user in current_data["users"]:
         if user["uid"] == order.restaurant_id:
-             user["orders"].append(order.menu_items)
+             user["orders"].append(vars(order))#converts object to dictionary
     write_data(current_data)         
     return {"order":order}
 
