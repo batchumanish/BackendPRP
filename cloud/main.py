@@ -7,7 +7,6 @@ db=client.get_database('manishclouddb')
 
 records=db.restdata
 
-print(records.count_documents({}))
 # Initialize FastAPI app
 user = FastAPI()
 
