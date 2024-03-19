@@ -12,7 +12,7 @@ user = APIRouter()
 async def get_test_collection_data():
     return serializeList(conn.manishclouddb.testcollection.find())
 
-@user.get("/search_restaurant/")
+@user.get("/search_restaurant")
 async def search_restaurant(
     restaurant_name: str ,
     menu_item_name: str
@@ -33,4 +33,20 @@ async def search_restaurant(
 
 
     return {"results":result}
+
+
+
+@user.get("/get_password")
+async def search_restaurant(
+username: str 
+):
+    pipeline = [
+        {"$match": { "username": username }},
+        {"$project":  { "_id": 0, "password": 1,"uid":1 }},# hide _id and show password 
+    ]
+
+    result =serializeList(conn.manishclouddb.users.aggregate(pipeline))
+
+
+    return {"uid":result[0]["uid"], "username": username,"password":result[0]["password"]}
 
