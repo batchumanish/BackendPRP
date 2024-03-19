@@ -13,3 +13,6 @@ show collections: to get all the collections in a database
 db.<collection_name>.find() :to get the data in a collection
 db.createCollection(<your_collection_name>):to create a collection in a db
 db.<your_collection_name>.insertOne({"gg":"wp"}) : to create a document in a collection
+db.<your_collection_name>.drop() : to delete a collection
+
+get restaurants based on restaurant or menuitem
