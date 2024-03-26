@@ -2,19 +2,13 @@ import motor
 from beanie import init_beanie
 from fastapi import FastAPI
 from routes.user import user
-from pydantic import BaseSettings
 
 
 app=FastAPI()
-# app.include_router(user)
-from models.user import Gg
+from models.user import testuser
 
 
-class Settings(BaseSettings):
-    # mongo_host: str = "localhost"
-    # mongo_user: str = "beanie"
-    # mongo_pass: str = "beanie"
-    # mongo_db: str = "beanie_db"
+class Settings():
 
     @property
     def mongo_dsn(self):
@@ -29,7 +23,7 @@ async def app_init():
     )
 
     # INIT BEANIE
-    await init_beanie(client.beanie_db, document_models=[Gg])
+    await init_beanie(client.beanie_db, document_models=[testuser])
 
     # ADD ROUTES
     app.include_router(user, prefix="/v1", tags=["notes"])

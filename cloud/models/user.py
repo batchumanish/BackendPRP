@@ -6,7 +6,7 @@ class User(BaseModel):
     email:str
     password:str
 
-class Gg(Document): 
+class testuser(Document): 
     name:str
     age:int   
     
